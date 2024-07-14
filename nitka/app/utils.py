@@ -3,8 +3,6 @@ from typing import Iterator
 
 import yaml
 
-max_file_size = 1024 * 1024  # 1 MB
-
 
 class FieldType(str, Enum):
     """Config file field types to extract"""
@@ -45,12 +43,6 @@ def extract_table_names(data: dict, field_type: FieldType) -> set[str]:
         elif isinstance(value, str):
             result.add(value)
     return result
-
-
-def validate_file_size(file) -> None:
-    """Validate the size of the uploaded file"""
-    if file.content_length > max_file_size:
-        raise ValueError
 
 
 def _find_values(data: dict | list, key_to_find: str) -> Iterator[str | dict]:
